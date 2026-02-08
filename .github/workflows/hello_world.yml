@@ -32,5 +32,17 @@ jobs:
       - name: Run Python script
         run: |
           echo Hello World!
-          python hello_world.py 
-     
+
+  print_secrets :
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Comment on PR
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          message: |
+            Hello world ! this is goutam 
+
